@@ -9,6 +9,10 @@
   using System.Net.Http;
   using System.Net.Http.Headers;
 
+  #if NETSTANDARD1_6
+  using Microsoft.Extensions.PlatformAbstractions;
+  #endif
+
   public class WebClient : IWebClient
   {
     private const int DefaultResponseTimeout = Timeout.Infinite;
@@ -67,8 +71,18 @@
 
     private ProductInfoHeaderValue GenerateUserAgent()
     {
-      AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
-      return new ProductInfoHeaderValue(assemblyName.Name, assemblyName.Version.ToString(2));
+      string assemblyName;
+      string assemblyVersion;
+#if NETSTANDARD1_6
+      assemblyName = PlatformServices.Default.Application.ApplicationName;
+      assemblyVersion = PlatformServices.Default.Application.ApplicationVersion.ToString();
+#else
+      var assembly = Assembly.GetExecutingAssembly().GetName();
+      assemblyName = assembly.Name;
+      assemblyVersion = assembly.Version.ToString(3);
+#endif
+
+      return new ProductInfoHeaderValue(assemblyName, assemblyVersion);
     }
   }
 }

@@ -93,7 +93,7 @@
           // This can occur when a folder is shared and the parent is shared too.
           // Both keys are working so we use the first one
           string serializedKey = this.SerializedKey.Split('/')[0];
-          int splitPosition = serializedKey.IndexOf(":", StringComparison.InvariantCulture);
+          int splitPosition = serializedKey.IndexOf(":");
           byte[] encryptedKey = serializedKey.Substring(splitPosition + 1).FromBase64();
 
           // If node is shared, we need to retrieve shared masterkey

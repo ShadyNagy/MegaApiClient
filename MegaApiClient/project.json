@@ -1,0 +1,57 @@
+{
+  "name": "MegaApiClient",
+  "version": "1.4.0-*",
+  "description": "MegaApiClient library gives full access to Mega.co.nz API. You can manage filesystem and download/upload files",
+  "copyright": "Copyright ©  2015",
+  "title": "Mega.co.nz client library",
+  "authors": ["Grégoire Pailler"],
+  "language": "en-US",
+
+  "packOptions": {
+    "summary": "C# library to access http://mega.co.nz API",
+    "tags": ["mega", "mega.co.nz", "api"],
+    "owners": ["Grégoire Pailler"],
+    "projectUrl": "https://github.com/gpailler/MegaApiClient",
+    "licenseUrl": "https://raw.github.com/gpailler/MegaApiClient/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/gpailler/MegaApiClient"
+    },
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1"
+  },
+
+  "frameworks": {
+    "net45": {
+      "dependencies": {
+        "System.Net.Http": "4.0.0.0"
+      },
+      "frameworkAssemblies": {
+        "System.Web": "4.0.0.0"
+      },
+      "buildOptions": {
+        "compile": {
+          "excludeFiles": ["WebClient_HttpWebRequest.cs", "HttpUtility.NetStandard.cs"]
+        }
+      }
+    },
+    "netstandard1.6": {
+      "dependencies": {
+        "System.Net.Http": "4.3.0",
+        "Microsoft.AspNetCore.WebUtilities": "1.0.0",
+        "System.Collections.Specialized": "4.0.1",
+        "System.Threading.Thread": "4.3.0",
+        "System.Console": "4.0.0",
+        "Microsoft.Extensions.PlatformAbstractions": "1.1.0"
+      },
+      "buildOptions": {
+        "compile": {
+          "excludeFiles": ["WebClient_HttpWebRequest.cs", "Properties/AssemblyInfo.cs"]
+        }
+      }
+    }
+  }
+}
