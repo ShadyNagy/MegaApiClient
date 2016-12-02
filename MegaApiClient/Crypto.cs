@@ -5,6 +5,8 @@
 
   using Newtonsoft.Json;
 
+  using CG.Web.MegaApiClient.Serialization;
+
   internal class Crypto
   {
     private static readonly Aes AesCbc;

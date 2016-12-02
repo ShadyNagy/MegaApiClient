@@ -6,13 +6,14 @@
   using System.Globalization;
   using System.IO;
   using System.Linq;
-  using System.Runtime.Serialization;
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Web;
 
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
+
+  using CG.Web.MegaApiClient.Serialization;
 
   public partial class MegaApiClient : IMegaApiClient
   {
@@ -255,7 +256,7 @@
       this.EnsureLoggedIn();
 
       GetNodesRequest request = new GetNodesRequest();
-      GetNodesResponse response = this.Request<GetNodesResponse>(request, this.masterKey);
+      GetNodesResponse response = this.Request<GetNodesResponse>(request);
 
       Node[] nodes = response.Nodes;
       if (this.trashNode == null)
@@ -352,7 +353,7 @@
       byte[] encryptedKey = Crypto.EncryptAes(key, this.masterKey);
 
       CreateNodeRequest request = CreateNodeRequest.CreateFolderNodeRequest(parent, attributes.ToBase64(), encryptedKey.ToBase64(), key);
-      GetNodesResponse response = this.Request<GetNodesResponse>(request, this.masterKey);
+      GetNodesResponse response = this.Request<GetNodesResponse>(request);
       return response.Nodes[0];
     }
 
@@ -695,7 +696,7 @@
           byte[] encryptedKey = Crypto.EncryptKey(fileKey, this.masterKey);
 
           CreateNodeRequest createNodeRequest = CreateNodeRequest.CreateFileNodeRequest(parent, cryptedAttributes.ToBase64(), encryptedKey.ToBase64(), fileKey, completionHandle);
-          GetNodesResponse createNodeResponse = this.Request<GetNodesResponse>(createNodeRequest, this.masterKey);
+          GetNodesResponse createNodeResponse = this.Request<GetNodesResponse>(createNodeRequest);
           return createNodeResponse.Nodes[0];
         }
       }
@@ -828,7 +829,7 @@
       return this.Request<string>(request);
     }
 
-    private TResponse Request<TResponse>(RequestBase request, object context = null)
+    private TResponse Request<TResponse>(RequestBase request)
         where TResponse : class
     {
       string dataRequest = JsonConvert.SerializeObject(new object[] { request });
@@ -869,11 +870,8 @@
         break;
       }
 
-      JsonSerializerSettings settings = new JsonSerializerSettings();
-      settings.Context = new StreamingContext(StreamingContextStates.All, context);
-
       string data = ((JArray)jsonData)[0].ToString();
-      return (typeof(TResponse) == typeof(string)) ? data as TResponse : JsonConvert.DeserializeObject<TResponse>(data, settings);
+      return (typeof(TResponse) == typeof(string)) ? data as TResponse : JsonConvert.DeserializeObject<TResponse>(data, new GetNodesResponseConverter(this.masterKey));
     }
 
     private Uri GenerateUrl()

@@ -90,25 +90,56 @@
     <Compile Include="..\MegaApiClient\IWebClient.cs">
       <Link>IWebClient.cs</Link>
     </Compile>
-    <Compile Include="..\MegaApiClient\JsonSerialization.cs">
-      <Link>JsonSerialization.cs</Link>
-    </Compile>
     <Compile Include="..\MegaApiClient\MegaAesCtrStream.cs">
       <Link>MegaAesCtrStream.cs</Link>
     </Compile>
     <Compile Include="..\MegaApiClient\MegaApiClient.cs">
       <Link>MegaApiClient.cs</Link>
     </Compile>
-    <Compile Include="..\MegaApiClient\Node.cs">
-      <Link>Node.cs</Link>
-    </Compile>
     <Compile Include="..\MegaApiClient\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\AccountInformation.cs">
+      <Link>Serialization\AccountInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Attributes.cs">
+      <Link>Serialization\Attributes.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Delete.cs">
+      <Link>Serialization\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Download.cs">
+      <Link>Serialization\Download.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Link.cs">
+      <Link>Serialization\Link.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Login.cs">
+      <Link>Serialization\Login.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Move.cs">
+      <Link>Serialization\Move.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Nodes.cs">
+      <Link>Serialization\Nodes.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Rename.cs">
+      <Link>Serialization\Rename.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\RequestBase.cs">
+      <Link>Serialization\RequestBase.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Share.cs">
+      <Link>Serialization\Share.cs</Link>
+    </Compile>
+    <Compile Include="..\MegaApiClient\Serialization\Upload.cs">
+      <Link>Serialization\Upload.cs</Link>
     </Compile>
     <Compile Include="..\MegaApiClient\WebClient_HttpWebRequest.cs">
       <Link>WebClient_HttpWebRequest.cs</Link>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
