@@ -11,7 +11,7 @@ namespace CG.Web.MegaApiClient.Tests
   [Collection("AuthenticatedLoginAsyncTests")]
   public class DownloadUploadAuthenticatedAsync : DownloadUploadAuthenticated
   {
-    private const int Timeout = 20000;
+    private const int Timeout = 180000;
 
     private readonly long savedReportProgressChunkSize;
 
@@ -21,6 +21,7 @@ namespace CG.Web.MegaApiClient.Tests
       this.savedReportProgressChunkSize = this.context.Options.ReportProgressChunkSize;
     }
 
+    [Fact]
     public override void Dispose()
     {
       this.context.Options.ReportProgressChunkSize = this.savedReportProgressChunkSize;

@@ -43,11 +43,13 @@ namespace CG.Web.MegaApiClient
 
     public Stream GetRequestRaw(Uri url)
     {
+      Thread.Sleep(500);
       return this.httpClient.GetStreamAsync(url).Result;
     }
 
     private string PostRequest(Uri url, Stream dataStream, string contentType)
     {
+      Thread.Sleep(500);
       using (StreamContent content = new StreamContent(dataStream, this.BufferSize))
       {
         content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
