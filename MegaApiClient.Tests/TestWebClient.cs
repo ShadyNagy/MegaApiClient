@@ -23,7 +23,7 @@ namespace CG.Web.MegaApiClient.Tests
         .Or<SocketException>()
         .Or<TaskCanceledException>()
         .Or<AggregateException>()
-        .WaitAndRetry(maxRetry, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), this.OnRetry);
+        .WaitAndRetry(maxRetry, retryAttempt => TimeSpan.FromMilliseconds(250 * Math.Pow(2, retryAttempt)), this.OnRetry);
       this._testOutputHelper = testOutputHelper;
     }
 
@@ -103,7 +103,7 @@ namespace CG.Web.MegaApiClient.Tests
         }
       }
 
-      this._testOutputHelper.WriteLine($"Request failed: {ts.TotalSeconds}, {ex}, {ex.Message}");
+      this._testOutputHelper.WriteLine($"Request failed: Total secounds={ts.TotalSeconds}, Exception={ex}, Exception Message={ex.Message}");
     }
   }
 }
