@@ -153,6 +153,17 @@ namespace CG.Web.MegaApiClient.Tests
     }
 
     [Fact]
+    public void DownloadLink_ToStream_Succeeds2()
+    {
+      const string expectedResultFile = "Data/SampleFile.jpg";
+
+      using (Stream stream = new FileStream(this.GetAbsoluteFilePath(expectedResultFile), FileMode.Open))
+      {
+        this.AreStreamsEquivalent(this.context.Client.Download(new Uri(AuthenticatedTestContext.FileLink)), stream);
+      }
+    }
+
+    [Fact]
     public void Download_ValidateStream_Succeeds()
     {
       using (Stream stream = this.context.Client.Download(new Uri(AuthenticatedTestContext.FileLink)))
