@@ -11,7 +11,7 @@ namespace CG.Web.MegaApiClient.Tests
   [Collection("AuthenticatedLoginAsyncTests")]
   public class DownloadUploadAuthenticatedAsync : DownloadUploadAuthenticated
   {
-    private const int Timeout = 180000;
+    private const int Timeout = 20000;
 
     private readonly long savedReportProgressChunkSize;
 
