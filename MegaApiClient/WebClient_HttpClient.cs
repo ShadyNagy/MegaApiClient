@@ -19,7 +19,10 @@ namespace CG.Web.MegaApiClient
     public WebClient(int responseTimeout = DefaultResponseTimeout, ProductInfoHeaderValue userAgent = null)
     {
       this.BufferSize = Options.DefaultBufferSize;
-      this.httpClient.Timeout = TimeSpan.FromMilliseconds(responseTimeout);
+      if (responseTimeout == Timeout.Infinite)
+        this.httpClient.Timeout = Timeout.InfiniteTimeSpan;
+      else
+        this.httpClient.Timeout = TimeSpan.FromMilliseconds(responseTimeout);
       this.httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent ?? this.GenerateUserAgent());
     }
 
