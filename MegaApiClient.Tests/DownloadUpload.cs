@@ -104,11 +104,11 @@ namespace CG.Web.MegaApiClient.Tests
           if (callType == TestWebClient.CallType.PostRequestRaw)
           {
             if (url.AbsolutePath.EndsWith("/0"))
-            {
-              // Reset counter when it's the first chunk (to avoid error when Upload is restarted from start)
-              uploadCalls = 1;
-            }
-            else
+            //{
+            //  // Reset counter when it's the first chunk (to avoid error when Upload is restarted from start)
+            //  uploadCalls = 1;
+            //}
+            //else
             {
               uploadCalls++;
             }
