@@ -141,6 +141,7 @@ namespace CG.Web.MegaApiClient.Tests
       yield return new object[] { new Uri("https://mega.nz/#!axYS1TLL!"), typeof(ArgumentException) };
     }
 
+    //Have problem in Anymouse
     [Fact]
     public void DownloadLink_ToStream_Succeeds()
     {
@@ -148,7 +149,9 @@ namespace CG.Web.MegaApiClient.Tests
 
       using (Stream stream = new FileStream(this.GetAbsoluteFilePath(expectedResultFile), FileMode.Open))
       {
-        this.AreStreamsEquivalent(this.context.Client.Download(new Uri(AuthenticatedTestContext.FileLink)), stream);
+        Uri uri = new Uri(AuthenticatedTestContext.FileLink);
+        Stream streamTmp = this.context.Client.Download(uri);
+        this.AreStreamsEquivalent(streamTmp, stream);
       }
     }
 
