@@ -20,7 +20,7 @@ namespace CG.Web.MegaApiClient
     {
       this.BufferSize = Options.DefaultBufferSize;
       if (responseTimeout == Timeout.Infinite)
-        this.httpClient.Timeout = TimeSpan.FromMilliseconds(180000); //Timeout.InfiniteTimeSpan;
+        this.httpClient.Timeout = Timeout.InfiniteTimeSpan;
       else
         this.httpClient.Timeout = TimeSpan.FromMilliseconds(responseTimeout);
       this.httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent ?? this.GenerateUserAgent());
