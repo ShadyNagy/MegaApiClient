@@ -92,6 +92,7 @@ namespace CG.Web.MegaApiClient.Tests
     public void UploadStream_ValidateContent_Succeeds(int dataSize, int chunksPackSize, int expectedUploadCalls)
     {
       byte[] uploadedData = new byte[dataSize];
+
       this.random.NextBytes(uploadedData);
 
       INode parent = this.GetNode(NodeType.Root);
