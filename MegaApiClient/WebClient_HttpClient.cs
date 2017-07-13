@@ -20,7 +20,7 @@ namespace CG.Web.MegaApiClient
     {
       this.BufferSize = Options.DefaultBufferSize;
       if (responseTimeout == Timeout.Infinite)
-        this.httpClient.Timeout = Timeout.InfiniteTimeSpan;
+        this.httpClient.Timeout = TimeSpan.FromMilliseconds(180000); //Timeout.InfiniteTimeSpan;
       else
         this.httpClient.Timeout = TimeSpan.FromMilliseconds(responseTimeout);
       this.httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent ?? this.GenerateUserAgent());
@@ -43,13 +43,11 @@ namespace CG.Web.MegaApiClient
 
     public Stream GetRequestRaw(Uri url)
     {
-      Thread.Sleep(500);
       return this.httpClient.GetStreamAsync(url).Result;
     }
 
     private string PostRequest(Uri url, Stream dataStream, string contentType)
     {
-      Thread.Sleep(500);
       using (StreamContent content = new StreamContent(dataStream, this.BufferSize))
       {
         content.Headers.ContentType = new MediaTypeHeaderValue(contentType);

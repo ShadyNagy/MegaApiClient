@@ -11,7 +11,7 @@ namespace CG.Web.MegaApiClient.Tests
   [Collection("AuthenticatedLoginAsyncTests")]
   public class DownloadUploadAuthenticatedAsync : DownloadUploadAuthenticated
   {
-    private const int Timeout = 20000;
+    private const int Timeout = 120000;
 
     private readonly long savedReportProgressChunkSize;
 
@@ -28,31 +28,33 @@ namespace CG.Web.MegaApiClient.Tests
       base.Dispose();
     }
 
-    //[Theory]
-    //[InlineData(null, 10L)]
-    //[InlineData(10L, 65L)]
-    //public long DownloadFileAsync_FromNode_Succeeds(long? reportProgressChunkSize, long expectedResult)
-    //{
-    //  // Arrange
-    //  this.context.Options.ReportProgressChunkSize = reportProgressChunkSize.GetValueOrDefault(this.context.Options.ReportProgressChunkSize);
-    //  var node = this.GetNode(((AuthenticatedTestContext)this.context).PermanentFilesNode);
 
-    //  EventTester<double> eventTester = new EventTester<double>();
-    //  IProgress<double> progress = new SyncProgress<double>(eventTester.OnRaised);
 
-    //  string outputFile = Path.GetTempFileName();
-    //  File.Delete(outputFile);
+    [Theory]
+    [InlineData(null, 10L)]
+    [InlineData(10L, 65L)]
+    public long DownloadFileAsync_FromNode_Succeeds(long? reportProgressChunkSize, long expectedResult)
+    {
+      // Arrange
+      this.context.Options.ReportProgressChunkSize = reportProgressChunkSize.GetValueOrDefault(this.context.Options.ReportProgressChunkSize);
+      var node = this.GetNode(((AuthenticatedTestContext)this.context).PermanentFilesNode);
 
-    //  // Act
-    //  Task task = this.context.Client.DownloadFileAsync(node, outputFile, progress);
-    //  bool result = task.Wait(Timeout);
+      EventTester<double> eventTester = new EventTester<double>();
+      IProgress<double> progress = new SyncProgress<double>(eventTester.OnRaised);
 
-    //  // Assert
-    //  Assert.True(result);
-    //  this.AreFileEquivalent(this.GetAbsoluteFilePath("Data/SampleFile.jpg"), outputFile);
+      string outputFile = Path.GetTempFileName();
+      File.Delete(outputFile);
 
-    //  return eventTester.Calls;
-    //}
+      // Act
+      Task task = this.context.Client.DownloadFileAsync(node, outputFile, progress);
+      bool result = task.Wait(Timeout);
+
+      // Assert
+      Assert.True(result);
+      this.AreFileEquivalent(this.GetAbsoluteFilePath("Data/SampleFile.jpg"), outputFile);
+
+      return eventTester.Calls;
+    }
 
     [Fact]
     public void DownloadFileAsync_FromLink_Succeeds()

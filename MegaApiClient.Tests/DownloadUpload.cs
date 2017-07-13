@@ -84,7 +84,7 @@ namespace CG.Web.MegaApiClient.Tests
     [Theory]
     [InlineData(20000, 128*1024, 1)]
     [InlineData(200000, 128*1024, 2)]
-    [InlineData(2000000, 128*1024, 6)]
+    [InlineData(2000000, 128*1024, 16)]
     [InlineData(20000, 1024*1024, 1)]
     [InlineData(200000, 1024*1024, 1)]
     [InlineData(2000000, 1024*1024, 2)]
